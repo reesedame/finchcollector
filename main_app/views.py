@@ -1,9 +1,5 @@
 from django.shortcuts import render
-
-finches = [
-    {"species": "American Goldfinch", "scientificName": "Spinus tristis"},
-    {"species": "Northern Cardinal", "scientificName": "Cardinalis cardinalis"},
-]
+from .models import Finch
 
 
 def home(request):
@@ -15,4 +11,5 @@ def about(request):
 
 
 def finches_index(request):
+    finches = Finch.objects.all()
     return render(request, "finches/index.html", {"finches": finches})
