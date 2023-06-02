@@ -17,7 +17,7 @@ class Finch(models.Model):
 
 
 class Feeding(models.Model):
-    date = models.DateField()
+    date = models.DateField("Feeding date")
     food_type = models.CharField(
         max_length=1, choices=FOOD_TYPES, default=FOOD_TYPES[0][0]
     )
