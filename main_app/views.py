@@ -21,8 +21,16 @@ def finches_index(request):
 def finches_detail(request, finch_id):
     finch = Finch.objects.get(id=finch_id)
     feeding_form = FeedingForm()
+    id_list = finch.locations.all().values_list("id")
+    available_locations = Location.objects.exclude(id__in=id_list)
     return render(
-        request, "finches/detail.html", {"finch": finch, "feeding_form": feeding_form}
+        request,
+        "finches/detail.html",
+        {
+            "finch": finch,
+            "feeding_form": feeding_form,
+            "locations": available_locations,
+        },
     )
 
 
@@ -34,6 +42,11 @@ def add_feeding(request, finch_id):
         new_feeding.finch_id = finch_id
         new_feeding.save()
 
+    return redirect("detail", finch_id=finch_id)
+
+
+def assoc_location(request, finch_id, location_id):
+    Finch.objects.get(id=finch_id).locations.add(location_id)
     return redirect("detail", finch_id=finch_id)
 
 

@@ -45,6 +45,50 @@
 
     </div>
 
+    <hr>
+
+    <div class="row">
+        <div class="col s6">
+            <h4>Locations where {{ finch.species }} has been spotted!</h4>
+            {% if finch.locations.count %}
+                {% for location in finch.locations.all %}
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title">
+                            {{location.name}}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <h5>This finch hasn't been seen yet!</h5>
+            {% endif %}
+        </div>
+
+        <div class="col s6">
+            <h4>Available Locations</h4>
+            {% if locations.count %}
+                {% for location in locations.all %}
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title">
+                            {{location.name}}
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <form action="{% url 'assoc_location' finch.id location.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn">Add</button>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <h5>No more available locations</h5>
+            {% endif %}
+        </div>
+    </div>
+
     <script>
         const dateEl = document.getElementById("id_date");
         M.Datepicker.init(dateEl, {
