@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Add Location Where A Finch Has Been Spotted!</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input class="btn blue" type="submit" value="Add">
+</form>
+
+{% endblock %}

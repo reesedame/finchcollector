@@ -4,10 +4,21 @@ from django.urls import reverse
 FOOD_TYPES = (("W", "Worm"), ("B", "Berry"), ("S", "Seed"))
 
 
+class Location(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("locations_list")
+
+
 class Finch(models.Model):
     species = models.CharField(max_length=100)
     scientific_name = models.CharField(max_length=100)
     conservation_status = models.CharField(max_length=100)
+    locations = models.ManyToManyField(Location)
 
     def __str__(self):
         return self.species
@@ -28,10 +39,3 @@ class Feeding(models.Model):
 
     class Meta:
         ordering = ["-date"]
-
-
-class Location(models.Model):
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name

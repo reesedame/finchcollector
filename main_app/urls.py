@@ -15,4 +15,5 @@ urlpatterns = [
     ),
     path("finches/<int:finch_id>/add_feeding/", views.add_feeding, name="add_feeding"),
     path("locations/", views.LocationList.as_view(), name="locations_list"),
+    path("locations/create/", views.LocationCreate.as_view(), name="location_create"),
 ]

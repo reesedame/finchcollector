@@ -54,3 +54,8 @@ class FinchDelete(DeleteView):
 
 class LocationList(ListView):
     model = Location
+
+
+class LocationCreate(CreateView):
+    model = Location
+    fields = ["name"]
