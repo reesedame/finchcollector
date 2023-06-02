@@ -25,3 +25,13 @@ class Feeding(models.Model):
 
     def __str__(self):
         return f"Fed {self.get_food_type_display()} on {self.date}"
+
+    class Meta:
+        ordering = ["-date"]
+
+
+class Location(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name

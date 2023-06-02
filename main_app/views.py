@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import Finch
+from .models import Finch, Location
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView
 from .forms import FeedingForm
 
 
@@ -49,3 +50,7 @@ class FinchUpdate(UpdateView):
 class FinchDelete(DeleteView):
     model = Finch
     success_url = "/finches"
+
+
+class LocationList(ListView):
+    model = Location
